@@ -1,0 +1,16 @@
+services:
+  docvault:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docvault
+    env_file:
+      - .env
+    environment:
+      DATA_DIR: /data
+      HOST: 0.0.0.0
+    ports:
+      - "3015:3015"
+    volumes:
+      - ./data:/data
+    restart: unless-stopped

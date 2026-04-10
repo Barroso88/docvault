@@ -5,8 +5,29 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
+function getProfileWithGoogle(userId) {
+  const user = db.prepare(`
+    SELECT
+      u.id,
+      u.name,
+      u.email,
+      u.created_at,
+      ga.picture,
+      CASE WHEN ga.id IS NOT NULL THEN 'google' ELSE 'email' END AS provider
+    FROM users u
+    LEFT JOIN google_accounts ga ON ga.user_id = u.id
+    WHERE u.id = ?
+  `).get(userId);
+
+  if (!user) return null;
+  return {
+    ...user,
+    picture: user.picture || null
+  };
+}
+
 router.get('/', auth, (req, res) => {
-  const user = db.prepare('SELECT id, name, email, created_at FROM users WHERE id = ?').get(req.user.id);
+  const user = getProfileWithGoogle(req.user.id);
   res.json(user);
 });
 
@@ -26,7 +47,7 @@ router.put('/', auth, async (req, res) => {
     db.prepare('UPDATE users SET password = ? WHERE id = ?').run(hashed, req.user.id);
   }
 
-  const user = db.prepare('SELECT id, name, email FROM users WHERE id = ?').get(req.user.id);
+  const user = getProfileWithGoogle(req.user.id);
   res.json(user);
 });
 

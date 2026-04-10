@@ -2710,6 +2710,18 @@
                 authToken = token;
                 currentUser = JSON.parse(userStr);
                 activeVaultId = currentUser.activeVaultId || localStorage.getItem('docvault_active_vault') || null;
+                try {
+                    const freshProfile = await apiCall('/profile');
+                    currentUser = {
+                        ...currentUser,
+                        ...freshProfile,
+                        picture: freshProfile.picture || currentUser.picture || null,
+                        provider: freshProfile.provider || currentUser.provider
+                    };
+                    localStorage.setItem('docvault_user', JSON.stringify(currentUser));
+                } catch {
+                    // Keep the cached session if the profile refresh fails.
+                }
                 hydrateSidebarFromCache();
                 showPage(pendingInviteToken ? 'invite' : 'dashboard');
             } else if (demoMode) {
@@ -2872,7 +2884,14 @@
             if (picture) {
                 el.classList.remove('bg-gradient-to-br', 'from-brand-400', 'to-purple-500', 'text-white', 'font-semibold');
                 el.classList.add('bg-surface-200', 'dark:bg-surface-700');
-                el.innerHTML = `<img src="${picture}" alt="${user.name || 'Utilizador'}" class="w-full h-full object-cover">`;
+                const img = document.createElement('img');
+                img.src = picture;
+                img.alt = user.name || 'Utilizador';
+                img.loading = 'eager';
+                img.decoding = 'async';
+                img.referrerPolicy = 'no-referrer';
+                img.className = 'w-full h-full object-cover';
+                el.replaceChildren(img);
                 return;
             }
 

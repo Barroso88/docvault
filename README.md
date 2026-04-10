@@ -62,17 +62,33 @@ Build e execução local:
 docker compose up --build
 ```
 
+## Imagem oficial para Unraid
+
+O repositório publica uma imagem no GitHub Container Registry através do workflow em `.github/workflows/docker-publish.yml`.
+
+Imagem a usar no Unraid:
+
+```text
+ghcr.io/barroso88/docvault:latest
+```
+
+Sempre que fizeres push para `main`, a imagem `latest` é atualizada. No Unraid, isso permite-te usar o botão de update do próprio container para puxar a versão nova.
+
 ## Unraid
 
 1. Faz push deste projeto para o GitHub.
-2. No Unraid, aponta o container para esse repositório.
-3. Mapeia um volume persistente para `/data`.
-4. Define as variáveis de ambiente:
+2. Espera pelo workflow publicar a imagem no GHCR.
+3. No Unraid, cria um container apontando para:
+   - `ghcr.io/barroso88/docvault:latest`
+4. Mapeia um volume persistente para `/data`.
+   - exemplo: `/mnt/user/appdata/docvault:/data`
+5. Define as variáveis de ambiente:
    - `PORT=3015`
    - `HOST=0.0.0.0`
    - `JWT_SECRET`
    - `GOOGLE_CLIENT_ID`
    - `DATA_DIR=/data`
+6. Se a imagem estiver privada, adiciona as credenciais do GHCR no Unraid ou torna o package público no GitHub.
 
 ## Variáveis de ambiente
 

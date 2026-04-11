@@ -90,6 +90,10 @@ Sempre que fizeres push para `main`, a imagem `latest` é atualizada. No Unraid,
    - `DATA_DIR=/data`
 6. Se a imagem estiver privada, adiciona as credenciais do GHCR no Unraid ou torna o package público no GitHub.
 
+Fallback útil:
+- se a variável não aparecer na UI do Unraid, cria um ficheiro `.env` em `/mnt/user/appdata/docvault/.env` com as mesmas variáveis.
+- o container lê esse ficheiro automaticamente no arranque.
+
 ## Variáveis de ambiente
 
 Verifica `.env.example` para a lista completa.

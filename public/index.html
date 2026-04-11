@@ -1132,6 +1132,32 @@
         </div>
     </div>
 
+    <div id="previewDocModal" class="hidden fixed inset-0 z-[55] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closePreviewDocModal()"></div>
+        <div class="relative bg-white dark:bg-surface-900 rounded-2xl shadow-2xl w-full max-w-6xl h-[90vh] flex flex-col overflow-hidden scale-in">
+            <div class="flex items-center justify-between gap-3 p-4 sm:p-5 border-b border-surface-200 dark:border-surface-800">
+                <div class="min-w-0">
+                    <p class="text-xs uppercase tracking-wider text-brand-500 font-semibold">Pré-visualização</p>
+                    <h3 id="previewDocTitle" class="text-lg font-bold truncate">Documento</h3>
+                </div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <button id="previewDocDownloadBtn" class="primary-action inline-flex items-center gap-2 px-4 py-2 text-white text-sm font-semibold rounded-xl transition-all">
+                        <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/18 ring-1 ring-white/20">
+                            <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        </span>
+                        <span>Descarregar</span>
+                    </button>
+                    <button onclick="closePreviewDocModal()" class="p-2 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-1 bg-surface-100 dark:bg-surface-950">
+                <div id="previewDocFrame" class="w-full h-full"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- ===================== SETTINGS MODAL ===================== -->
     <div id="settingsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeSettingsModal()"></div>
@@ -3888,7 +3914,6 @@
             const doc = documents.find(d => d.id === id);
             if (!doc) return;
             const cat = getCategoryMeta(doc.category);
-            const downloadUrl = doc.file_path ? `${API_URL}/api/documents/${id}/download` : null;
             const content = document.getElementById('viewDocContent');
             content.innerHTML = `
                 <div class="space-y-4">
@@ -3902,18 +3927,143 @@
                         <div class="p-3 bg-surface-50 dark:bg-surface-700/50 rounded-xl"><p class="text-xs text-surface-500 dark:text-surface-400">Adicionado em</p><p class="text-sm font-medium">${formatDate(doc.upload_date)}</p></div>
                     </div>
                     ${doc.tags && doc.tags.length ? `<div><p class="text-sm text-surface-500 dark:text-surface-400 mb-2">Etiquetas</p><div class="flex flex-wrap gap-1">${doc.tags.map(t => `<span class="px-2 py-1 bg-brand-100 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400 text-xs rounded-full">${t}</span>`).join('')}</div></div>` : ''}
-                    ${doc.file_name ? `<div class="p-3 bg-surface-50 dark:bg-surface-700/50 rounded-xl flex items-center justify-between">
-                        <div class="flex items-center gap-2">
+                    ${doc.file_name ? `<div class="p-3 bg-surface-50 dark:bg-surface-700/50 rounded-xl flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <div class="flex items-center gap-2 min-w-0">
                             <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                            <div><p class="text-sm font-medium">${doc.file_name}</p><p class="text-xs text-surface-400">${doc.file_size || ''}</p></div>
+                            <div class="min-w-0"><p class="text-sm font-medium truncate">${doc.file_name}</p><p class="text-xs text-surface-400">${doc.file_size || ''}</p></div>
                         </div>
-                        ${downloadUrl ? `<a href="${downloadUrl}" class="text-sm text-brand-600 hover:text-brand-700 font-medium">Descarregar</a>` : ''}
+                        <div class="flex items-center gap-2 flex-wrap">
+                            ${doc.file_path ? `<button type="button" onclick="previewDocument('${doc.id}')" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-surface-300 dark:border-surface-600 hover:bg-surface-100 dark:hover:bg-surface-700 transition-colors text-sm font-semibold">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12h.01M12 12h.01M9 12h.01M21 12c-2.33 4.667-6 7-9 7s-6.667-2.333-9-7c2.333-4.667 6-7 9-7s6.667 2.333 9 7z"/></svg>
+                                <span>Visualizar</span>
+                            </button>` : ''}
+                            ${doc.file_path ? `<button type="button" onclick="downloadDocument('${doc.id}')" class="primary-action inline-flex items-center gap-2 px-4 py-2 text-white text-sm font-semibold rounded-xl transition-all">
+                                <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/18 ring-1 ring-white/20">
+                                    <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                </span>
+                                <span>Descarregar</span>
+                            </button>` : ''}
+                        </div>
                     </div>` : '<p class="text-sm text-surface-400 text-center py-2">Nenhum ficheiro anexado</p>'}
                 </div>`;
             document.getElementById('viewDocModal').classList.remove('hidden');
         }
 
         function closeViewDocModal() { document.getElementById('viewDocModal').classList.add('hidden'); }
+
+        let currentPreviewUrl = null;
+
+        function closePreviewDocModal() {
+            if (currentPreviewUrl) {
+                URL.revokeObjectURL(currentPreviewUrl);
+                currentPreviewUrl = null;
+            }
+            const frame = document.getElementById('previewDocFrame');
+            if (frame) frame.innerHTML = '';
+            document.getElementById('previewDocModal').classList.add('hidden');
+        }
+
+        function renderPreviewContent(blob, doc) {
+            const frame = document.getElementById('previewDocFrame');
+            if (!frame) return;
+            const name = (doc.file_name || '').toLowerCase();
+            const type = String(blob.type || '').toLowerCase();
+            const isImage = type.startsWith('image/') || /\.(png|jpe?g|gif|webp|bmp|svg)$/i.test(name);
+            const isPdf = type.includes('pdf') || /\.pdf$/i.test(name);
+            const isText = type.startsWith('text/') || /\.(txt|md|csv|json|xml|log)$/i.test(name);
+
+            if (isImage) {
+                frame.innerHTML = `<img src="${currentPreviewUrl}" alt="${doc.file_name || doc.name}" class="w-full h-full object-contain bg-black/5 dark:bg-black/20">`;
+                return;
+            }
+
+            if (isPdf || isText) {
+                frame.innerHTML = `<iframe src="${currentPreviewUrl}" title="${doc.file_name || doc.name}" class="w-full h-full border-0 bg-white dark:bg-surface-900"></iframe>`;
+                return;
+            }
+
+            frame.innerHTML = `
+                <div class="h-full flex items-center justify-center p-6">
+                    <div class="max-w-md text-center rounded-2xl border border-surface-200 dark:border-surface-700 bg-white/80 dark:bg-surface-900/70 p-6 shadow-lg">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center text-brand-600 dark:text-brand-300">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">${doc.file_name || 'Documento'}</h4>
+                        <p class="text-sm text-surface-500 dark:text-surface-400">Este formato não pode ser pré-visualizado diretamente no browser. Podes descarregar o ficheiro usando o botão acima.</p>
+                    </div>
+                </div>`;
+        }
+
+        async function previewDocument(id) {
+            const doc = documents.find((item) => item.id === id);
+            if (!doc || !doc.file_path) return;
+
+            try {
+                const res = await fetch(`${API_URL}/api/documents/${id}/download`, {
+                    headers: authToken ? { Authorization: `Bearer ${authToken}` } : {}
+                });
+
+                if (!res.ok) {
+                    let message = 'Não foi possível abrir o ficheiro.';
+                    try {
+                        const err = await res.json();
+                        message = err.error || message;
+                    } catch {
+                        const text = await res.text();
+                        if (text) message = text;
+                    }
+                    throw new Error(message);
+                }
+
+                const blob = await res.blob();
+                if (currentPreviewUrl) URL.revokeObjectURL(currentPreviewUrl);
+                currentPreviewUrl = URL.createObjectURL(blob);
+                document.getElementById('previewDocTitle').textContent = doc.file_name || doc.name || 'Documento';
+                const downloadBtn = document.getElementById('previewDocDownloadBtn');
+                downloadBtn.onclick = () => downloadDocument(id);
+                renderPreviewContent(blob, doc);
+                document.getElementById('previewDocModal').classList.remove('hidden');
+            } catch (err) {
+                showToast(err.message, 'error');
+            }
+        }
+
+        async function downloadDocument(id) {
+            const doc = documents.find((item) => item.id === id);
+            if (!doc) return;
+
+            try {
+                showToast(`A descarregar ${doc.file_name || doc.name}...`, 'info');
+                const res = await fetch(`${API_URL}/api/documents/${id}/download`, {
+                    headers: authToken ? { Authorization: `Bearer ${authToken}` } : {}
+                });
+
+                if (!res.ok) {
+                    let message = 'Não foi possível descarregar o ficheiro.';
+                    try {
+                        const err = await res.json();
+                        message = err.error || message;
+                    } catch {
+                        const text = await res.text();
+                        if (text) message = text;
+                    }
+                    throw new Error(message);
+                }
+
+                const blob = await res.blob();
+                const objectUrl = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = objectUrl;
+                a.download = doc.file_name || `docvault-${id}`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(objectUrl);
+                showToast(`Download concluído: ${doc.file_name || doc.name}`, 'success');
+            } catch (err) {
+                showToast(err.message, 'error');
+            }
+        }
 
         // ===================== FILE HANDLING =====================
         function handleFileSelect(input) { if (input.files.length) handleFileSelectObj(input.files[0]); }

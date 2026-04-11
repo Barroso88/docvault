@@ -11,6 +11,6 @@ const candidates = [
 
 for (const filePath of candidates) {
   if (fs.existsSync(filePath)) {
-    dotenv.config({ path: filePath });
+    dotenv.config({ path: filePath, override: true });
   }
 }

@@ -1346,13 +1346,13 @@
             </div>
             <div class="p-6 space-y-4">
                 <div><label class="block text-sm font-medium mb-1.5">Nome</label><input type="text" id="settingsName" class="w-full px-4 py-2.5 border border-surface-300 dark:border-surface-600 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-transparent text-surface-900 dark:text-white"></div>
-                <div class="p-4 rounded-2xl border border-surface-200 dark:border-surface-700 bg-surface-50/80 dark:bg-surface-900/40">
+                <div id="settingsEnvironmentCard" class="p-4 rounded-2xl border border-surface-200 dark:border-surface-700 bg-surface-50/80 dark:bg-surface-900/40">
                     <div class="flex items-center justify-between gap-3">
                         <div class="min-w-0">
                             <p class="text-sm font-medium">Ambiente da app</p>
                             <p id="settingsEnvironmentSummary" class="text-xs text-surface-500 dark:text-surface-400 truncate">Produção · https://docs.barrosoportal.com</p>
                         </div>
-                        <button type="button" onclick="openEnvironmentModal()" class="px-3 py-2 rounded-xl border border-brand-200 dark:border-brand-900/40 text-brand-600 dark:text-brand-300 bg-brand-50/60 dark:bg-brand-900/20 font-medium text-sm hover:bg-brand-100 dark:hover:bg-brand-900/30 transition-colors">Alterar</button>
+                        <button id="settingsEnvironmentOpenBtn" type="button" onclick="openEnvironmentModal()" class="px-3 py-2 rounded-xl border border-brand-200 dark:border-brand-900/40 text-brand-600 dark:text-brand-300 bg-brand-50/60 dark:bg-brand-900/20 font-medium text-sm hover:bg-brand-100 dark:hover:bg-brand-900/30 transition-colors">Alterar</button>
                     </div>
                 </div>
                 <div>
@@ -1931,6 +1931,7 @@
         }
 
         function shouldShowEnvironmentPicker() {
+            if (!IS_NATIVE_SHELL) return false;
             const params = new URLSearchParams(window.location.search);
             return params.get('env') === 'select' || !localStorage.getItem(API_ENV_STORAGE_KEY);
         }
@@ -1966,6 +1967,10 @@
             if (customInput && apiEnvironmentChoice === 'custom') {
                 customInput.value = apiEnvironmentCustomUrl || '';
             }
+            const environmentCard = document.getElementById('settingsEnvironmentCard');
+            if (environmentCard) environmentCard.classList.toggle('hidden', !IS_NATIVE_SHELL);
+            const environmentOpenBtn = document.getElementById('settingsEnvironmentOpenBtn');
+            if (environmentOpenBtn) environmentOpenBtn.classList.toggle('hidden', !IS_NATIVE_SHELL);
 
         }
 

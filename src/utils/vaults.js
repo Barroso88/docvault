@@ -115,10 +115,12 @@ function ensurePersonalVaultForUser(userId, userName = '') {
 
 function ensureVaultCategories(vaultId, createdByUserId = null) {
   const existing = db
-    .prepare('SELECT key FROM categories WHERE vault_id = ?')
-    .all(vaultId)
-    .map((row) => row.key);
-  const existingSet = new Set(existing);
+    .prepare('SELECT COUNT(*) AS count FROM categories WHERE vault_id = ?')
+    .get(vaultId);
+
+  if (existing && existing.count > 0) {
+    return;
+  }
 
   const insert = db.prepare(`
     INSERT OR IGNORE INTO categories (id, vault_id, key, name, icon, color, created_by)
@@ -126,7 +128,6 @@ function ensureVaultCategories(vaultId, createdByUserId = null) {
   `);
 
   DEFAULT_CATEGORY_ORDER.forEach((key) => {
-    if (existingSet.has(key)) return;
     const category = DEFAULT_CATEGORIES[key];
     insert.run(uuidv4(), vaultId, key, category.name, category.icon, category.color, createdByUserId);
   });
@@ -614,7 +615,7 @@ function updateVaultCategory(vaultId, categoryKey, payload = {}) {
 
 function deleteVaultCategory(vaultId, categoryKey) {
   ensureVaultCategories(vaultId);
-  if (!categoryKey || DEFAULT_CATEGORIES[categoryKey]) {
+  if (!categoryKey) {
     const err = new Error('Esta categoria não pode ser apagada');
     err.status = 400;
     throw err;
@@ -623,10 +624,29 @@ function deleteVaultCategory(vaultId, categoryKey) {
   const current = getCategoryByKey(vaultId, categoryKey);
   if (!current) return null;
 
-  const fallback = getCategoryByKey(vaultId, 'outros') || listVaultCategories(vaultId)[0];
-  if (fallback) {
-    db.prepare('UPDATE documents SET category = ? WHERE vault_id = ? AND category = ?').run(fallback.key, vaultId, categoryKey);
+  const fallback = db
+    .prepare(`
+      SELECT key, name, icon, color
+      FROM categories
+      WHERE vault_id = ? AND key != ?
+      ORDER BY
+        CASE key
+          WHEN 'outros' THEN 0
+          ELSE 1
+        END,
+        name COLLATE NOCASE ASC
+      LIMIT 1
+    `)
+    .get(vaultId, categoryKey)
+    || null;
+
+  if (!fallback) {
+    const err = new Error('Precisas de manter pelo menos uma categoria neste cofre');
+    err.status = 400;
+    throw err;
   }
+
+  db.prepare('UPDATE documents SET category = ? WHERE vault_id = ? AND category = ?').run(fallback.key, vaultId, categoryKey);
 
   db.prepare('DELETE FROM categories WHERE vault_id = ? AND key = ?').run(vaultId, categoryKey);
   return current;

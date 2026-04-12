@@ -247,6 +247,15 @@
             --theme-panel-border: rgb(20 184 166 / 0.26);
             --theme-accent-shadow: rgba(20, 184, 166, 0.22);
         }
+        html[data-theme]:not(.dark) {
+            --theme-page-bg: linear-gradient(135deg, rgb(250 252 255) 0%, rgb(241 245 249) 55%, rgb(226 232 240) 100%);
+            --theme-hero-bg: linear-gradient(135deg, rgb(var(--brand-500) / 0.14) 0%, rgb(var(--brand-300) / 0.14) 48%, rgb(255 255 255 / 0.96) 100%);
+            --theme-sidebar-bg: rgba(255, 255, 255, 0.94);
+            --theme-header-bg: rgba(255, 255, 255, 0.88);
+            --theme-panel-bg: rgba(255, 255, 255, 0.88);
+            --theme-panel-border: rgb(var(--brand-500) / 0.14);
+            --theme-accent-shadow: rgb(var(--brand-500) / 0.10);
+        }
         body {
             background: var(--theme-page-bg);
         }
@@ -277,6 +286,14 @@
             color: #fff !important;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
         }
+        html[data-theme]:not(.dark) #sidebar .brand-wordmark {
+            background: linear-gradient(135deg, rgb(var(--brand-700)) 0%, rgb(var(--brand-500)) 100%) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            color: transparent !important;
+            text-shadow: none;
+        }
         .sidebar-wordmark {
             display: inline-flex;
             align-items: center;
@@ -289,6 +306,14 @@
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 18px rgba(0, 0, 0, 0.18);
             -webkit-text-fill-color: #fff;
+        }
+        html[data-theme]:not(.dark) .sidebar-wordmark {
+            background: linear-gradient(135deg, rgb(var(--brand-50)) 0%, rgb(var(--brand-100)) 100%);
+            color: rgb(var(--brand-800));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 8px 18px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(var(--brand-500), 0.08);
+            text-shadow: none;
+            -webkit-text-fill-color: rgb(var(--brand-800));
         }
         html[data-theme="ocean"] .sidebar-wordmark,
         html[data-theme="forest"] .sidebar-wordmark,
@@ -305,6 +330,11 @@
             background: linear-gradient(180deg, color-mix(in srgb, var(--theme-header-bg) 96%, white 4%) 0%, var(--theme-header-bg) 100%) !important;
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.08);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        html[data-theme]:not(.dark) #dashboardPage main > header {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.90) 100%) !important;
+            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(var(--brand-500), 0.10);
         }
         html[data-theme] .glass {
             backdrop-filter: blur(16px);
@@ -390,12 +420,26 @@
                 var(--theme-sidebar-bg) !important;
             box-shadow: 18px 0 40px rgba(0, 0, 0, 0.24), inset -1px 0 0 rgba(255, 255, 255, 0.06);
         }
+        html[data-theme]:not(.dark) #sidebar {
+            background-image:
+                radial-gradient(circle at top, rgb(var(--brand-500) / 0.10), transparent 34%),
+                linear-gradient(180deg, rgba(255,255,255,0.70), transparent 36%),
+                var(--theme-sidebar-bg) !important;
+            box-shadow: 18px 0 40px rgba(15, 23, 42, 0.08), inset -1px 0 0 rgba(255, 255, 255, 0.85);
+        }
         html[data-theme] #sidebar > div {
             background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 22%);
+        }
+        html[data-theme]:not(.dark) #sidebar > div {
+            background: linear-gradient(180deg, rgba(255,255,255,0.65), transparent 22%);
         }
         html[data-theme] #sidebar .border-b,
         html[data-theme] #sidebar .border-t {
             border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+        html[data-theme]:not(.dark) #sidebar .border-b,
+        html[data-theme]:not(.dark) #sidebar .border-t {
+            border-color: rgba(var(--brand-500), 0.10) !important;
         }
         html[data-theme] #sidebar button.nav-btn,
         html[data-theme] #sidebar #sidebarManageBtn,
@@ -404,19 +448,83 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 16px rgba(0, 0, 0, 0.10);
         }
+        html[data-theme]:not(.dark) #sidebar button.nav-btn,
+        html[data-theme]:not(.dark) #sidebar #sidebarManageBtn,
+        html[data-theme]:not(.dark) #sidebar #sidebarCategoryManageBtn {
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(var(--brand-500), 0.10);
+            color: rgb(var(--surface-700));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92), 0 8px 16px rgba(15, 23, 42, 0.08);
+        }
         html[data-theme] #sidebar button.nav-btn:hover,
         html[data-theme] #sidebar #sidebarManageBtn:hover,
         html[data-theme] #sidebar #sidebarCategoryManageBtn:hover {
             background: rgba(255, 255, 255, 0.08);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 12px 24px rgba(0, 0, 0, 0.16);
         }
+        html[data-theme]:not(.dark) #sidebar button.nav-btn:hover,
+        html[data-theme]:not(.dark) #sidebar #sidebarManageBtn:hover,
+        html[data-theme]:not(.dark) #sidebar #sidebarCategoryManageBtn:hover {
+            background: rgba(var(--brand-500), 0.09);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.96), 0 12px 24px rgba(15, 23, 42, 0.12);
+        }
+        html[data-theme] #sidebar #sidebarCategoryManageBtn {
+            position: relative;
+            background: linear-gradient(180deg, rgba(59, 130, 246, 0.20), rgba(59, 130, 246, 0.08));
+            border-color: rgba(59, 130, 246, 0.28);
+            color: rgb(219, 234, 254);
+            padding: 0.85rem 0.95rem;
+            letter-spacing: 0.02em;
+            font-weight: 700;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 10px 22px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.02);
+        }
+        html[data-theme]:not(.dark) #sidebar #sidebarCategoryManageBtn {
+            background: linear-gradient(180deg, rgba(var(--brand-500), 0.16), rgba(var(--brand-500), 0.06));
+            border-color: rgba(var(--brand-500), 0.22);
+            color: rgb(var(--brand-700));
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.96), 0 10px 22px rgba(15,23,42,0.08), 0 0 0 1px rgba(255,255,255,0.35);
+        }
+        html[data-theme] #sidebar #sidebarCategoryManageBtn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.24), transparent 40%);
+            pointer-events: none;
+        }
+        html[data-theme]:not(.dark) #sidebar #sidebarCategoryManageBtn::before {
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.72), transparent 40%);
+        }
+        html[data-theme] #sidebar #sidebarCategoryManageBtn:hover {
+            background: linear-gradient(180deg, rgba(59, 130, 246, 0.28), rgba(59, 130, 246, 0.12));
+            border-color: rgba(96, 165, 250, 0.45);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 14px 28px rgba(0,0,0,0.18);
+            transform: translateY(-1px);
+        }
+        html[data-theme]:not(.dark) #sidebar #sidebarCategoryManageBtn:hover {
+            background: linear-gradient(180deg, rgba(var(--brand-500), 0.24), rgba(var(--brand-500), 0.12));
+            border-color: rgba(var(--brand-500), 0.34);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.98), 0 14px 28px rgba(15,23,42,0.14);
+        }
         html[data-theme] #sidebarVaultList button,
         html[data-theme] #sidebarCategoryList button {
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 16px rgba(0, 0, 0, 0.12);
         }
+        html[data-theme]:not(.dark) #sidebarVaultList button,
+        html[data-theme]:not(.dark) #sidebarCategoryList button {
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(var(--brand-500), 0.10);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.96), 0 8px 16px rgba(15, 23, 42, 0.08);
+        }
         html[data-theme] #sidebarVaultList button[aria-current="true"],
         html[data-theme] #sidebarCategoryList button[aria-current="true"] {
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10), 0 14px 24px rgba(0, 0, 0, 0.18);
+        }
+        html[data-theme]:not(.dark) #sidebarVaultList button[aria-current="true"],
+        html[data-theme]:not(.dark) #sidebarCategoryList button[aria-current="true"] {
+            background: linear-gradient(180deg, rgba(var(--brand-500), 0.16), rgba(var(--brand-500), 0.08));
+            border-color: rgba(var(--brand-500), 0.24);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.96), 0 14px 24px rgba(15,23,42,0.10);
         }
         html[data-theme] #sidebar .sidebar-section {
             background: rgba(255, 255, 255, 0.03);
@@ -424,16 +532,29 @@
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 14px 28px rgba(0, 0, 0, 0.14);
             backdrop-filter: blur(14px);
         }
+        html[data-theme]:not(.dark) #sidebar .sidebar-section {
+            background: rgba(255, 255, 255, 0.80);
+            border: 1px solid rgba(var(--brand-500), 0.10);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.96), 0 14px 28px rgba(15, 23, 42, 0.08);
+        }
         html[data-theme] #sidebar .sidebar-section-title {
             letter-spacing: 0.16em;
             text-transform: uppercase;
             font-size: 10px;
             color: rgba(226, 232, 240, 0.75);
         }
+        html[data-theme]:not(.dark) #sidebar .sidebar-section-title {
+            color: rgb(71 85 105 / 0.80);
+        }
         html[data-theme] #sidebar .sidebar-footer {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.07);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 -12px 24px rgba(0, 0, 0, 0.12);
+        }
+        html[data-theme]:not(.dark) #sidebar .sidebar-footer {
+            background: rgba(255, 255, 255, 0.84);
+            border: 1px solid rgba(var(--brand-500), 0.10);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.96), 0 -12px 24px rgba(15, 23, 42, 0.08);
         }
         html[data-theme] .primary-action {
             position: relative;
@@ -882,7 +1003,10 @@
                     <div class="sidebar-section p-3 rounded-3xl">
                         <div class="pt-1 pb-3 flex items-center justify-between gap-3">
                             <p class="sidebar-section-title px-1 font-semibold text-surface-400 dark:text-surface-500">Categorias</p>
-                            <button id="sidebarCategoryManageBtn" onclick="showCategoryManagerModal()" class="text-xs font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400">Gerir</button>
+                            <button id="sidebarCategoryManageBtn" onclick="showCategoryManagerModal()" class="inline-flex items-center gap-1.5 text-xs font-medium rounded-full transition-all" title="Gerir categorias">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6"/></svg>
+                                <span>Gerir</span>
+                            </button>
                         </div>
                         <div id="sidebarCategoryList" class="space-y-1"></div>
                     </div>
@@ -1120,6 +1244,60 @@
         </div>
     </div>
 
+    <!-- ===================== ENVIRONMENT MODAL ===================== -->
+    <div id="environmentModal" class="hidden fixed inset-0 z-[65] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div class="relative bg-white dark:bg-surface-800 rounded-3xl shadow-2xl w-full max-w-2xl scale-in overflow-hidden border border-surface-200 dark:border-surface-700">
+            <div class="flex items-start justify-between gap-4 p-6 border-b border-surface-200 dark:border-surface-700">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.2em] text-brand-500 font-semibold">Ambiente da app</p>
+                    <h3 class="text-2xl font-bold mt-1">Escolhe o servidor</h3>
+                    <p class="text-sm text-surface-500 dark:text-surface-400 mt-2 max-w-xl">Define para onde o DocVault vai ligar ao arrancar. Podes trocar isto depois nas definições da conta.</p>
+                </div>
+                <button type="button" onclick="closeEnvironmentModal()" class="p-2 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-700 transition-colors" title="Fechar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="p-6 space-y-5">
+                <div class="grid gap-3 sm:grid-cols-3">
+                    <button type="button" id="environmentProductionBtn" onclick="selectEnvironmentChoice('production')" class="text-left p-4 rounded-2xl border border-surface-200 dark:border-surface-700 bg-surface-50/80 dark:bg-surface-900/40 transition-all hover:-translate-y-0.5 hover:border-brand-300">
+                        <p class="text-sm font-semibold">Produção</p>
+                        <p class="text-xs text-surface-500 dark:text-surface-400 mt-2 break-all">https://docs.barrosoportal.com</p>
+                        <p class="text-[11px] text-surface-400 mt-2">Ambiente real do DocVault.</p>
+                    </button>
+                    <button type="button" id="environmentLocalBtn" onclick="selectEnvironmentChoice('local')" class="text-left p-4 rounded-2xl border border-surface-200 dark:border-surface-700 bg-surface-50/80 dark:bg-surface-900/40 transition-all hover:-translate-y-0.5 hover:border-brand-300">
+                        <p class="text-sm font-semibold">Local</p>
+                        <p class="text-xs text-surface-500 dark:text-surface-400 mt-2 break-all">http://localhost:3015</p>
+                        <p class="text-[11px] text-surface-400 mt-2">Usa o teu servidor local.</p>
+                    </button>
+                    <button type="button" id="environmentCustomBtn" onclick="selectEnvironmentChoice('custom')" class="text-left p-4 rounded-2xl border border-surface-200 dark:border-surface-700 bg-surface-50/80 dark:bg-surface-900/40 transition-all hover:-translate-y-0.5 hover:border-brand-300">
+                        <p class="text-sm font-semibold">Personalizado</p>
+                        <p class="text-xs text-surface-500 dark:text-surface-400 mt-2 break-all">Outro endereço HTTPS/HTTP</p>
+                        <p class="text-[11px] text-surface-400 mt-2">Ideal para staging ou túnel.</p>
+                    </button>
+                </div>
+                <div id="environmentCustomBox" class="hidden p-4 rounded-2xl border border-brand-200 dark:border-brand-900/40 bg-brand-50/60 dark:bg-brand-900/10">
+                    <label class="block text-sm font-medium mb-1.5">URL personalizada</label>
+                    <input type="url" id="environmentCustomUrl" class="w-full px-4 py-2.5 border border-surface-300 dark:border-surface-600 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-white/70 dark:bg-surface-900 text-surface-900 dark:text-white" placeholder="https://docs.barrosoportal.com">
+                    <p class="text-xs text-surface-500 dark:text-surface-400 mt-2">Exemplo: o teu túnel Cloudflare ou outro servidor de testes.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <label class="inline-flex items-center gap-3 text-sm text-surface-600 dark:text-surface-300">
+                        <input type="checkbox" id="environmentRememberChoice" class="w-4 h-4 rounded border-surface-300 text-brand-600 focus:ring-brand-500" checked>
+                        Lembrar esta escolha
+                    </label>
+                    <button type="button" onclick="saveEnvironmentSelection()" class="primary-action inline-flex items-center justify-center gap-2 px-5 py-3 text-white font-semibold rounded-2xl shadow-lg">
+                        <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/18 ring-1 ring-white/20">
+                            <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        </span>
+                        Usar este ambiente
+                    </button>
+                </div>
+                <p id="environmentSelectionHint" class="text-xs text-surface-500 dark:text-surface-400">Seleciona um ambiente para continuar.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- ===================== VIEW DOCUMENT MODAL ===================== -->
     <div id="viewDocModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeViewDocModal()"></div>
@@ -1168,6 +1346,15 @@
             </div>
             <div class="p-6 space-y-4">
                 <div><label class="block text-sm font-medium mb-1.5">Nome</label><input type="text" id="settingsName" class="w-full px-4 py-2.5 border border-surface-300 dark:border-surface-600 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-transparent text-surface-900 dark:text-white"></div>
+                <div class="p-4 rounded-2xl border border-surface-200 dark:border-surface-700 bg-surface-50/80 dark:bg-surface-900/40">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="text-sm font-medium">Ambiente da app</p>
+                            <p id="settingsEnvironmentSummary" class="text-xs text-surface-500 dark:text-surface-400 truncate">Produção · https://docs.barrosoportal.com</p>
+                        </div>
+                        <button type="button" onclick="openEnvironmentModal()" class="px-3 py-2 rounded-xl border border-brand-200 dark:border-brand-900/40 text-brand-600 dark:text-brand-300 bg-brand-50/60 dark:bg-brand-900/20 font-medium text-sm hover:bg-brand-100 dark:hover:bg-brand-900/30 transition-colors">Alterar</button>
+                    </div>
+                </div>
                 <div>
                     <label class="block text-sm font-medium mb-1.5">Tema</label>
                     <select id="settingsTheme" onchange="applyTheme(this.value)" class="w-full px-4 py-2.5 border border-surface-300 dark:border-surface-600 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-transparent text-surface-900 dark:text-white"></select>
@@ -1362,12 +1549,24 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-1.5">Ícone</label>
-                                <div class="flex items-center gap-2 mb-2">
-                                    <div id="categoryIconPreview" class="w-11 h-11 rounded-xl bg-surface-100 dark:bg-surface-700 flex items-center justify-center text-xl">📁</div>
-                                    <div class="text-xs text-surface-500 dark:text-surface-400">Escolhe um emoji da grelha ou escreve um emoji personalizado.</div>
+                                <button type="button" onclick="toggleCategoryIconPicker()" class="w-full px-4 py-3 rounded-2xl border border-surface-300 dark:border-surface-600 bg-white/80 dark:bg-surface-900/60 hover:border-brand-400 hover:shadow-lg transition-all flex items-center justify-between gap-3 text-left">
+                                    <span class="flex items-center gap-3 min-w-0">
+                                        <span id="categoryIconPreview" class="w-11 h-11 rounded-xl bg-surface-100 dark:bg-surface-700 flex items-center justify-center text-xl shrink-0">📁</span>
+                                        <span class="min-w-0">
+                                            <span class="block font-medium">Selecionar ícone</span>
+                                            <span class="block text-xs text-surface-500 dark:text-surface-400 truncate">Clica para abrir a galeria de ícones</span>
+                                        </span>
+                                    </span>
+                                    <svg class="w-5 h-5 text-surface-400 shrink-0 transition-transform" id="categoryIconPickerChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                </button>
+                                <div id="categoryIconPickerPanel" class="hidden mt-3 p-4 rounded-2xl border border-surface-200 dark:border-surface-700 bg-surface-50 dark:bg-surface-900/50 shadow-inner space-y-4">
+                                    <div class="flex items-center justify-between gap-3">
+                                        <div class="text-xs text-surface-500 dark:text-surface-400">Escolhe um emoji da galeria ou escreve um emoji personalizado.</div>
+                                        <button type="button" onclick="closeCategoryIconPicker()" class="text-xs font-medium text-brand-600 dark:text-brand-400 hover:underline">Fechar</button>
+                                    </div>
+                                    <input type="text" id="categoryCustomIcon" maxlength="12" oninput="handleCustomCategoryIconInput()" class="w-full px-4 py-2.5 border border-surface-300 dark:border-surface-600 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-transparent text-surface-900 dark:text-white" placeholder="Ex: 🧠">
+                                    <div id="categoryIconGrid" class="grid grid-cols-6 sm:grid-cols-8 gap-2"></div>
                                 </div>
-                                <input type="text" id="categoryCustomIcon" maxlength="12" oninput="handleCustomCategoryIconInput()" class="w-full px-4 py-2.5 mb-3 border border-surface-300 dark:border-surface-600 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-transparent text-surface-900 dark:text-white" placeholder="Ex: 🧠">
-                                <div id="categoryIconGrid" class="grid grid-cols-5 sm:grid-cols-6 gap-2"></div>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-1.5">Cor</label>
@@ -1435,7 +1634,13 @@
 
     <script>
         // ===================== CONFIG =====================
-        const API_URL = ''; // Deixa vazio se usares reverse proxy, senão coloca 'http://<IP-UNRAID>:3000'
+        const IS_NATIVE_SHELL = window.location.protocol === 'capacitor:' || window.location.protocol === 'ionic:' || (window.location.hostname === 'localhost' && !window.location.port);
+        const CAPACITOR_SERVER_URL = window.Capacitor?.config?.server?.url || '';
+        const DEFAULT_API_URL = 'https://docs.barrosoportal.com';
+        const API_ENV_STORAGE_KEY = 'docvault_api_environment_choice';
+        const API_ENV_CUSTOM_URL_KEY = 'docvault_api_environment_custom_url';
+        const API_URL_FALLBACK = window.__DOCVAULT_API_URL__ || CAPACITOR_SERVER_URL || DEFAULT_API_URL;
+        let API_URL = API_URL_FALLBACK;
         let googleClientId = '';
         let googleInitialized = false;
         const DEMO_USER = {
@@ -1619,12 +1824,13 @@
             financas: { name: 'Finanças', icon: '💰', color: 'green' },
             outros: { name: 'Outros', icon: '📁', color: 'surface' }
         };
-        const CATEGORY_ICONS = ['📋', '🧾', '🏥', '🐕', '🛡️', '📄', '💰', '📁', '🏠', '🚗', '🎓', '🏛️', '🧑‍💼', '💳', '🪪', '📦', '🧑‍⚕️', '🧑‍🔧', '🧑‍🏫', '🖼️', '📚', '🧠', '⚖️', '🧾', '🧷', '🗂️', '🛠️', '🏦', '🧑‍👩‍👧‍👦', '💻', '📞', '🌿', '🧳', '🏖️', '🧾', '📮', '✈️', '🎫', '🧬', '🧯'];
+        const CATEGORY_ICONS = ['📋', '🧾', '🏥', '🐕', '🛡️', '📄', '💰', '📁', '🧑‍💼', '🏠', '🚗', '🎓', '🏛️', '📦', '🧑‍🔧', '🧑‍⚕️', '🧑‍🎓', '🧒', '💳', '🪪', '🗂️', '🧠', '⚖️', '🏦', '📞', '🛠️', '💻', '🌿', '🧳', '🏖️', '✈️', '🎫', '🧬', '🧯', '🏡', '🏢', '🧵', '🪙', '🧷', '📚', '📰', '📝', '🔒', '🔑', '📮', '📅', '🗝️', '🛒', '🍽️', '👶', '🧓', '🚑', '🚚', '🏆', '🎮', '🎨', '🎵', '📷', '📺', '🛰️', '🧰', '🧪', '🧹'];
         const CATEGORY_COLORS = ['blue', 'emerald', 'rose', 'amber', 'purple', 'cyan', 'green', 'orange', 'indigo', 'teal', 'pink', 'slate', 'surface'];
         const DEFAULT_CATEGORY_ORDER = Object.keys(DEFAULT_CATEGORIES);
         let vaultCategories = [];
         let categoryEditKey = null;
         let categorySelectedIcon = DEFAULT_CATEGORIES.outros.icon;
+        let categoryIconPickerOpen = false;
         const VAULTS_CACHE_KEY = 'docvault_vaults_cache';
         const VAULT_CATEGORIES_CACHE_KEY = 'docvault_vault_categories_cache';
         const THEME_STORAGE_KEY = 'docvault_theme';
@@ -1643,10 +1849,225 @@
         let currentTheme = THEME_OPTIONS.some((theme) => theme.id === localStorage.getItem(THEME_STORAGE_KEY))
             ? localStorage.getItem(THEME_STORAGE_KEY)
             : DEFAULT_THEME;
+        let apiEnvironmentChoice = localStorage.getItem(API_ENV_STORAGE_KEY) || 'production';
+        let apiEnvironmentCustomUrl = localStorage.getItem(API_ENV_CUSTOM_URL_KEY) || '';
+        let appBootstrapped = false;
+        let apiEnvironmentSelected = Boolean(localStorage.getItem(API_ENV_STORAGE_KEY));
 
         function isDemoModeEnabled() {
             const params = new URLSearchParams(window.location.search);
             return params.get('demo') === '1' || localStorage.getItem('demo_mode') === 'true';
+        }
+
+        function getApiEnvironmentMeta(choice = apiEnvironmentChoice, customUrl = apiEnvironmentCustomUrl) {
+            const normalized = String(choice || 'production').toLowerCase();
+            if (normalized === 'local') {
+                return {
+                    id: 'local',
+                    label: 'Local',
+                    url: 'http://localhost:3015',
+                    description: 'Usa o servidor local desta máquina.'
+                };
+            }
+            if (normalized === 'custom') {
+                const cleanUrl = normalizeServerUrl(customUrl);
+                return {
+                    id: 'custom',
+                    label: 'Personalizado',
+                    url: cleanUrl,
+                    description: cleanUrl ? 'Usa um servidor definido por ti.' : 'Define um endereço personalizado.'
+                };
+            }
+            return {
+                id: 'production',
+                label: 'Produção',
+                url: DEFAULT_API_URL,
+                description: 'Servidor público do DocVault.'
+            };
+        }
+
+        function normalizeServerUrl(value) {
+            const raw = String(value || '').trim();
+            if (!raw) return '';
+            try {
+                return new URL(raw).origin;
+            } catch {
+                try {
+                    return new URL(raw.includes('://') ? raw : `https://${raw}`).origin;
+                } catch {
+                    return '';
+                }
+            }
+        }
+
+        function resolveApiUrl() {
+            const meta = getApiEnvironmentMeta();
+            if (meta.id === 'custom' && meta.url) return meta.url;
+            return meta.url || API_URL_FALLBACK;
+        }
+
+        function applyApiEnvironment(choice, customUrl = apiEnvironmentCustomUrl, persist = true) {
+            const normalizedChoice = ['production', 'local', 'custom'].includes(String(choice || '').toLowerCase())
+                ? String(choice).toLowerCase()
+                : 'production';
+            const meta = getApiEnvironmentMeta(normalizedChoice, customUrl);
+            if (normalizedChoice === 'custom' && !meta.url) {
+                throw new Error('Indica um endereço válido para o ambiente personalizado.');
+            }
+            apiEnvironmentChoice = normalizedChoice;
+            apiEnvironmentCustomUrl = normalizedChoice === 'custom' ? meta.url : '';
+            API_URL = normalizedChoice === 'custom' ? meta.url : meta.url || API_URL_FALLBACK;
+            window.__DOCVAULT_API_URL__ = API_URL;
+            apiEnvironmentSelected = true;
+            if (persist) {
+                localStorage.setItem(API_ENV_STORAGE_KEY, apiEnvironmentChoice);
+                if (apiEnvironmentCustomUrl) {
+                    localStorage.setItem(API_ENV_CUSTOM_URL_KEY, apiEnvironmentCustomUrl);
+                } else {
+                    localStorage.removeItem(API_ENV_CUSTOM_URL_KEY);
+                }
+            }
+            updateEnvironmentUi();
+        }
+
+        function shouldShowEnvironmentPicker() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('env') === 'select' || !localStorage.getItem(API_ENV_STORAGE_KEY);
+        }
+
+        function updateEnvironmentUi() {
+            const summary = document.getElementById('settingsEnvironmentSummary');
+            const hint = document.getElementById('environmentSelectionHint');
+            const activeMeta = getApiEnvironmentMeta();
+            if (summary) summary.textContent = `${activeMeta.label} · ${activeMeta.url || 'Endereço pendente'}`;
+            if (hint) hint.textContent = `Ambiente ativo: ${activeMeta.label}${activeMeta.url ? ` · ${activeMeta.url}` : ''}`;
+
+            const buttons = [
+                { id: 'environmentProductionBtn', choice: 'production' },
+                { id: 'environmentLocalBtn', choice: 'local' },
+                { id: 'environmentCustomBtn', choice: 'custom' }
+            ];
+            buttons.forEach(({ id, choice }) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const active = apiEnvironmentChoice === choice;
+                el.classList.toggle('border-brand-500', active);
+                el.classList.toggle('bg-brand-50', active);
+                el.classList.toggle('dark:bg-brand-900/20', active);
+                el.classList.toggle('text-brand-600', active);
+                el.classList.toggle('dark:text-brand-300', active);
+                el.classList.toggle('shadow-lg', active);
+            });
+
+            const customBox = document.getElementById('environmentCustomBox');
+            if (customBox) customBox.classList.toggle('hidden', apiEnvironmentChoice !== 'custom');
+
+            const customInput = document.getElementById('environmentCustomUrl');
+            if (customInput && apiEnvironmentChoice === 'custom') {
+                customInput.value = apiEnvironmentCustomUrl || '';
+            }
+
+        }
+
+        function openEnvironmentModal() {
+            const modal = document.getElementById('environmentModal');
+            if (!modal) return;
+            updateEnvironmentUi();
+            modal.classList.remove('hidden');
+        }
+
+        function closeEnvironmentModal() {
+            const modal = document.getElementById('environmentModal');
+            if (!modal) return;
+            modal.classList.add('hidden');
+        }
+
+        function selectEnvironmentChoice(choice) {
+            apiEnvironmentChoice = choice;
+            if (choice !== 'custom') {
+                const customInput = document.getElementById('environmentCustomUrl');
+                if (customInput) customInput.value = apiEnvironmentCustomUrl || '';
+            }
+            updateEnvironmentUi();
+        }
+
+        function formatEnvironmentLabel(choice = apiEnvironmentChoice, customUrl = apiEnvironmentCustomUrl) {
+            const meta = getApiEnvironmentMeta(choice, customUrl);
+            return meta.url ? `${meta.label} · ${meta.url}` : meta.label;
+        }
+
+        function saveEnvironmentSelection() {
+            const remember = document.getElementById('environmentRememberChoice');
+            const choice = apiEnvironmentChoice;
+            const customInput = document.getElementById('environmentCustomUrl');
+            const customUrl = choice === 'custom' ? normalizeServerUrl(customInput?.value || '') : '';
+            const shouldRemember = remember ? remember.checked : true;
+            if (choice === 'custom' && !customUrl) {
+                showToast('Indica um endereço válido para o ambiente personalizado.', 'error');
+                return;
+            }
+            applyApiEnvironment(choice, customUrl, shouldRemember);
+            closeEnvironmentModal();
+            showToast(`Ambiente selecionado: ${formatEnvironmentLabel(choice, customUrl)}`, 'success');
+            setTimeout(() => window.location.reload(), 180);
+        }
+
+        async function bootApp() {
+            if (appBootstrapped) return;
+            appBootstrapped = true;
+            await loadPublicConfig();
+            if (localStorage.getItem('darkMode') === 'true') document.documentElement.classList.add('dark');
+            applyTheme(currentTheme, false);
+            const params = new URLSearchParams(window.location.search);
+            pendingInviteToken = params.get('invite');
+            if (!pendingInviteToken && window.location.pathname.startsWith('/invite/')) {
+                pendingInviteToken = window.location.pathname.split('/').filter(Boolean)[1] || null;
+            }
+            if (isDemoModeEnabled()) {
+                setDemoMode(true);
+                loadDemoState();
+            }
+            const token = localStorage.getItem('docvault_token');
+            const userStr = localStorage.getItem('docvault_user');
+            if (!demoMode && token && userStr) {
+                authToken = token;
+                currentUser = JSON.parse(userStr);
+                activeVaultId = currentUser.activeVaultId || localStorage.getItem('docvault_active_vault') || null;
+                try {
+                    const freshProfile = await apiCall('/profile');
+                    currentUser = {
+                        ...currentUser,
+                        ...freshProfile,
+                        picture: freshProfile.picture || currentUser.picture || null,
+                        provider: freshProfile.provider || currentUser.provider
+                    };
+                    localStorage.setItem('docvault_user', JSON.stringify(currentUser));
+                } catch {
+                    // Keep the cached session if the profile refresh fails.
+                }
+                hydrateSidebarFromCache();
+                showPage(pendingInviteToken ? 'invite' : 'dashboard');
+            } else if (demoMode) {
+                hydrateSidebarFromCache();
+                showPage(pendingInviteToken ? 'invite' : 'dashboard');
+            } else if (pendingInviteToken) {
+                showPage('invite');
+            } else {
+                showPage('landing');
+            }
+            const dz = document.getElementById('dropZone');
+            if (dz) {
+                dz.addEventListener('dragover', (e) => { e.preventDefault(); dz.classList.add('border-brand-500', 'bg-brand-50', 'dark:bg-brand-900/10'); });
+                dz.addEventListener('dragleave', () => { dz.classList.remove('border-brand-500', 'bg-brand-50', 'dark:bg-brand-900/10'); });
+                dz.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    dz.classList.remove('border-brand-500', 'bg-brand-50', 'dark:bg-brand-900/10');
+                    if (e.dataTransfer.files.length) handleFileSelectObj(e.dataTransfer.files[0]);
+                });
+            }
+            renderGoogleButton();
+            updateLoginSessionBanner();
+            if (pendingInviteToken) loadInvitePreview();
         }
 
         function cloneDemoDocuments() {
@@ -1851,11 +2272,8 @@
 
         function getAllCategoryList() {
             const list = getVaultCategoryList();
-            const byKey = new Map(list.map((item) => [item.key, item]));
-            getDefaultCategoryList().forEach((item) => {
-                if (!byKey.has(item.key)) byKey.set(item.key, item);
-            });
-            return Array.from(byKey.values());
+            if (list.length) return list;
+            return getDefaultCategoryList();
         }
 
         function getCategoryIconClass(color) {
@@ -1912,6 +2330,24 @@
             }).join('');
         }
 
+        function updateCategoryIconPickerUi() {
+            const panel = document.getElementById('categoryIconPickerPanel');
+            const chevron = document.getElementById('categoryIconPickerChevron');
+            if (panel) panel.classList.toggle('hidden', !categoryIconPickerOpen);
+            if (chevron) chevron.style.transform = categoryIconPickerOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        function toggleCategoryIconPicker(forceOpen = null) {
+            categoryIconPickerOpen = typeof forceOpen === 'boolean' ? forceOpen : !categoryIconPickerOpen;
+            updateCategoryIconPickerUi();
+            if (categoryIconPickerOpen) renderCategoryManagerIconGrid();
+        }
+
+        function closeCategoryIconPicker() {
+            categoryIconPickerOpen = false;
+            updateCategoryIconPickerUi();
+        }
+
         function renderCategoryManagerIconGrid() {
             const grid = document.getElementById('categoryIconGrid');
             const preview = document.getElementById('categoryIconPreview');
@@ -1919,8 +2355,9 @@
             if (preview) preview.textContent = categorySelectedIcon || DEFAULT_CATEGORIES.outros.icon;
             grid.innerHTML = CATEGORY_ICONS.map((icon) => {
                 const active = categorySelectedIcon === icon;
-                return `<button type="button" onclick="selectCategoryIcon('${icon}')" class="w-11 h-11 rounded-2xl border transition-all text-lg shadow-sm ${active ? 'border-brand-500 bg-brand-50 dark:bg-brand-900/20 text-brand-600 dark:text-brand-300 scale-105 ring-2 ring-brand-200 dark:ring-brand-900/30' : 'border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-800 hover:border-brand-400 hover:-translate-y-0.5'}">${icon}</button>`;
+                return `<button type="button" onclick="selectCategoryIcon('${icon}')" class="w-12 h-12 rounded-2xl border transition-all text-xl shadow-sm ${active ? 'border-brand-500 bg-brand-50 dark:bg-brand-900/20 text-brand-600 dark:text-brand-300 scale-105 ring-2 ring-brand-200 dark:ring-brand-900/30' : 'border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-800 hover:border-brand-400 hover:-translate-y-0.5'}">${icon}</button>`;
             }).join('');
+            updateCategoryIconPickerUi();
         }
 
         function renderCategoryColorSelect() {
@@ -1933,6 +2370,7 @@
         function resetCategoryForm() {
             categoryEditKey = null;
             categorySelectedIcon = DEFAULT_CATEGORIES.outros.icon;
+            categoryIconPickerOpen = false;
             const title = document.getElementById('categoryFormTitle');
             const keyInput = document.getElementById('categoryEditKey');
             const nameInput = document.getElementById('categoryName');
@@ -1989,6 +2427,8 @@
             if (saveBtn) saveBtn.textContent = 'Atualizar';
             renderCategoryManagerIconGrid();
             renderCategoryColorSelect();
+            categoryIconPickerOpen = false;
+            updateCategoryIconPickerUi();
         }
 
         function showCategoryManagerModal() {
@@ -1999,6 +2439,8 @@
             const modal = document.getElementById('categoryManageModal');
             if (!modal) return;
             renderCategoryManager();
+            categoryIconPickerOpen = false;
+            updateCategoryIconPickerUi();
             modal.classList.remove('hidden');
         }
 
@@ -2012,18 +2454,17 @@
             if (!list) return;
             const categories = getAllCategoryList();
             list.innerHTML = categories.map((cat) => {
-                const isDefault = !!DEFAULT_CATEGORIES[cat.key];
                 return `<div class="p-4 rounded-2xl border border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-800 flex items-center justify-between gap-4">
                     <div class="flex items-center gap-3 min-w-0">
                         <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl ${getCategoryIconClass(cat.color)}">${cat.icon}</div>
                         <div class="min-w-0">
                             <div class="font-semibold truncate">${cat.name}</div>
-                            <div class="text-xs text-surface-500 dark:text-surface-400 truncate">${cat.key}${isDefault ? ' · padrão' : ''}</div>
+                            <div class="text-xs text-surface-500 dark:text-surface-400 truncate">${cat.key}</div>
                         </div>
                     </div>
                     <div class="flex items-center gap-2 flex-shrink-0">
                         <button type="button" onclick="editCategory('${cat.key}')" class="px-3 py-2 rounded-xl border border-surface-200 dark:border-surface-700 text-sm hover:bg-surface-50 dark:hover:bg-surface-700 transition-colors">Editar</button>
-                        ${isDefault ? '' : `<button type="button" onclick="deleteCategory('${cat.key}')" class="px-3 py-2 rounded-xl bg-red-600 text-white text-sm hover:bg-red-700 transition-colors">Apagar</button>`}
+                        <button type="button" onclick="deleteCategory('${cat.key}')" class="px-3 py-2 rounded-xl bg-red-600 text-white text-sm hover:bg-red-700 transition-colors">Apagar</button>
                     </div>
                 </div>`;
             }).join('');
@@ -2496,8 +2937,7 @@
                 const list = ensureDemoCategories(vaultId);
                 const current = list.find((item) => item.key === key);
                 if (!current) throw new Error('Categoria não encontrada');
-                if (DEFAULT_CATEGORIES[key]) throw new Error('Esta categoria não pode ser apagada');
-                const fallback = list.find((item) => item.key === 'outros') || list[0];
+                const fallback = list.find((item) => item.key === 'outros') || list.find((item) => item.key !== key);
                 demoDocuments = demoDocuments.map((doc) => (
                     doc.vault_id === vaultId && doc.category === key
                         ? { ...doc, category: fallback?.key || 'outros' }
@@ -2718,9 +3158,10 @@
 
         // ===================== INIT =====================
         async function init() {
-            await loadPublicConfig();
             if (localStorage.getItem('darkMode') === 'true') document.documentElement.classList.add('dark');
             applyTheme(currentTheme, false);
+            API_URL = resolveApiUrl();
+            window.__DOCVAULT_API_URL__ = API_URL;
             const params = new URLSearchParams(window.location.search);
             pendingInviteToken = params.get('invite');
             if (!pendingInviteToken && window.location.pathname.startsWith('/invite/')) {
@@ -2730,47 +3171,10 @@
                 setDemoMode(true);
                 loadDemoState();
             }
-            const token = localStorage.getItem('docvault_token');
-            const userStr = localStorage.getItem('docvault_user');
-            if (!demoMode && token && userStr) {
-                authToken = token;
-                currentUser = JSON.parse(userStr);
-                activeVaultId = currentUser.activeVaultId || localStorage.getItem('docvault_active_vault') || null;
-                try {
-                    const freshProfile = await apiCall('/profile');
-                    currentUser = {
-                        ...currentUser,
-                        ...freshProfile,
-                        picture: freshProfile.picture || currentUser.picture || null,
-                        provider: freshProfile.provider || currentUser.provider
-                    };
-                    localStorage.setItem('docvault_user', JSON.stringify(currentUser));
-                } catch {
-                    // Keep the cached session if the profile refresh fails.
-                }
-                hydrateSidebarFromCache();
-                showPage(pendingInviteToken ? 'invite' : 'dashboard');
-            } else if (demoMode) {
-                hydrateSidebarFromCache();
-                showPage(pendingInviteToken ? 'invite' : 'dashboard');
-            } else if (pendingInviteToken) {
-                showPage('invite');
-            } else {
-                showPage('landing');
+            if (!demoMode && shouldShowEnvironmentPicker()) {
+                openEnvironmentModal();
             }
-            const dz = document.getElementById('dropZone');
-            if (dz) {
-                dz.addEventListener('dragover', (e) => { e.preventDefault(); dz.classList.add('border-brand-500', 'bg-brand-50', 'dark:bg-brand-900/10'); });
-                dz.addEventListener('dragleave', () => { dz.classList.remove('border-brand-500', 'bg-brand-50', 'dark:bg-brand-900/10'); });
-                dz.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    dz.classList.remove('border-brand-500', 'bg-brand-50', 'dark:bg-brand-900/10');
-                    if (e.dataTransfer.files.length) handleFileSelectObj(e.dataTransfer.files[0]);
-                });
-            }
-            renderGoogleButton();
-            updateLoginSessionBanner();
-            if (pendingInviteToken) loadInvitePreview();
+            await bootApp();
         }
 
         // ===================== PAGE NAV =====================
@@ -2953,6 +3357,71 @@
             return vault.description || (vault.is_personal ? 'Espaço privado por defeito' : 'Cofre partilhado');
         }
 
+        function syncVaultPermissionUi() {
+            if (!currentUser) return;
+            const canManage = canCurrentVaultPerform('manage');
+            const canInvite = canCurrentVaultPerform('invite');
+            const canUpload = canCurrentVaultPerform('upload');
+            const canEditDocs = canCurrentVaultPerform('edit');
+            const editSection = document.querySelector('[data-vault-edit-section]');
+            const inviteSection = document.querySelector('[data-vault-invite-section]');
+            const deleteSection = document.querySelector('[data-vault-delete-section]');
+            const vaultSaveBtn = document.getElementById('vaultSaveBtn');
+            const inviteBtn = document.getElementById('inviteBtn');
+            const addDocBtn = document.getElementById('headerAddDocBtn');
+            const sidebarManageBtn = document.getElementById('sidebarManageBtn');
+            const sidebarCategoryManageBtn = document.getElementById('sidebarCategoryManageBtn');
+            const categoryManageBtn = document.getElementById('categoryManageBtn');
+            const docCategoryManageBtn = document.getElementById('docCategoryManageBtn');
+            const deleteVaultQuickBtn = document.getElementById('vaultDeleteQuickBtn');
+            const actionSummaryTitle = document.getElementById('vaultActionSummaryTitle');
+            const actionSummaryDesc = document.getElementById('vaultActionSummaryDesc');
+            const chipView = document.getElementById('summaryChipView');
+            const chipUpload = document.getElementById('summaryChipUpload');
+            const chipEdit = document.getElementById('summaryChipEdit');
+            const chipManage = document.getElementById('summaryChipManage');
+            const canDeleteVault = isCurrentVaultOwner() && !activeVault?.is_personal;
+
+            if (editSection) editSection.classList.toggle('hidden', !canManage);
+            if (inviteSection) inviteSection.classList.toggle('hidden', !canInvite);
+            if (deleteSection) deleteSection.classList.toggle('hidden', !canDeleteVault);
+            if (vaultSaveBtn) vaultSaveBtn.disabled = !canManage;
+            if (inviteBtn) inviteBtn.disabled = !canInvite;
+            if (addDocBtn) {
+                addDocBtn.disabled = !canUpload;
+                addDocBtn.title = canUpload ? 'Novo Documento' : getPermissionHint('upload');
+                addDocBtn.classList.toggle('opacity-50', !canUpload);
+                addDocBtn.classList.toggle('cursor-not-allowed', !canUpload);
+            }
+            if (sidebarManageBtn) {
+                sidebarManageBtn.disabled = !canManage;
+                sidebarManageBtn.title = canManage ? 'Gerir partilha' : getPermissionHint('manage');
+                sidebarManageBtn.classList.toggle('opacity-50', !canManage);
+                sidebarManageBtn.classList.toggle('cursor-not-allowed', !canManage);
+            }
+            [sidebarCategoryManageBtn, categoryManageBtn, docCategoryManageBtn].forEach((btn) => {
+                if (!btn) return;
+                btn.disabled = !canManage;
+                btn.title = canManage ? 'Gerir categorias' : getPermissionHint('manage');
+                btn.classList.toggle('opacity-50', !canManage);
+                btn.classList.toggle('cursor-not-allowed', !canManage);
+            });
+            const deleteVaultBtn = document.getElementById('deleteVaultBtn');
+            if (deleteVaultBtn) {
+                deleteVaultBtn.disabled = !canDeleteVault;
+                deleteVaultBtn.title = canDeleteVault ? 'Apagar cofre' : (activeVault?.is_personal ? 'O cofre pessoal não pode ser apagado' : 'Só o owner pode apagar este cofre');
+                deleteVaultBtn.classList.toggle('opacity-50', !canDeleteVault);
+                deleteVaultBtn.classList.toggle('cursor-not-allowed', !canDeleteVault);
+            }
+            if (deleteVaultQuickBtn) deleteVaultQuickBtn.classList.toggle('hidden', !canDeleteVault);
+            if (actionSummaryTitle) actionSummaryTitle.textContent = getRoleLabel(activeVault?.role);
+            if (actionSummaryDesc) actionSummaryDesc.textContent = getRoleDescription(activeVault?.role);
+            if (chipView) chipView.className = `px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider ${canCurrentVaultPerform('view') ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300' : 'bg-surface-200 text-surface-600 dark:bg-surface-800 dark:text-surface-300'}`;
+            if (chipUpload) chipUpload.className = `px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider ${canUpload ? 'bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300' : 'bg-surface-200 text-surface-600 dark:bg-surface-800 dark:text-surface-300'}`;
+            if (chipEdit) chipEdit.className = `px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider ${canEditDocs ? 'bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300' : 'bg-surface-200 text-surface-600 dark:bg-surface-800 dark:text-surface-300'}`;
+            if (chipManage) chipManage.className = `px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider ${canManage ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300' : 'bg-surface-200 text-surface-600 dark:bg-surface-800 dark:text-surface-300'}`;
+        }
+
         if (!Object.getOwnPropertyDescriptor(window, 'active')) {
             Object.defineProperty(window, 'active', {
                 configurable: true,
@@ -3025,6 +3494,7 @@
                 roleSummaryBadge.textContent = `${getRoleIcon(active.role)} ${getRoleLabel(active.role)}`;
                 roleSummaryBadge.className = `inline-flex items-center gap-1 text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full ${getRolePillClass(active.role)}`;
             }
+            syncVaultPermissionUi();
         }
 
         function renderVaultMemberCard(member) {
@@ -3533,66 +4003,7 @@
             document.getElementById('profileEmail').textContent = currentUser.email;
             updateGoogleBadges(currentUser);
             document.getElementById('settingsName').value = currentUser.name;
-            const canManage = canCurrentVaultPerform('manage');
-            const canInvite = canCurrentVaultPerform('invite');
-            const canUpload = canCurrentVaultPerform('upload');
-            const canEditDocs = canCurrentVaultPerform('edit');
-            const editSection = document.querySelector('[data-vault-edit-section]');
-            const inviteSection = document.querySelector('[data-vault-invite-section]');
-            const deleteSection = document.querySelector('[data-vault-delete-section]');
-            const vaultSaveBtn = document.getElementById('vaultSaveBtn');
-            const inviteBtn = document.getElementById('inviteBtn');
-            const addDocBtn = document.getElementById('headerAddDocBtn');
-            const sidebarManageBtn = document.getElementById('sidebarManageBtn');
-            const sidebarCategoryManageBtn = document.getElementById('sidebarCategoryManageBtn');
-            const categoryManageBtn = document.getElementById('categoryManageBtn');
-            const docCategoryManageBtn = document.getElementById('docCategoryManageBtn');
-            const deleteVaultQuickBtn = document.getElementById('vaultDeleteQuickBtn');
-            const actionSummaryTitle = document.getElementById('vaultActionSummaryTitle');
-            const actionSummaryDesc = document.getElementById('vaultActionSummaryDesc');
-            const chipView = document.getElementById('summaryChipView');
-            const chipUpload = document.getElementById('summaryChipUpload');
-            const chipEdit = document.getElementById('summaryChipEdit');
-            const chipManage = document.getElementById('summaryChipManage');
-            const canDeleteVault = isCurrentVaultOwner() && !activeVault?.is_personal;
-            if (editSection) editSection.classList.toggle('hidden', !canManage);
-            if (inviteSection) inviteSection.classList.toggle('hidden', !canInvite);
-            if (deleteSection) deleteSection.classList.toggle('hidden', !canDeleteVault);
-            if (vaultSaveBtn) vaultSaveBtn.disabled = !canManage;
-            if (inviteBtn) inviteBtn.disabled = !canInvite;
-            if (addDocBtn) {
-                addDocBtn.disabled = !canUpload;
-                addDocBtn.title = canUpload ? 'Novo Documento' : getPermissionHint('upload');
-                addDocBtn.classList.toggle('opacity-50', !canUpload);
-                addDocBtn.classList.toggle('cursor-not-allowed', !canUpload);
-            }
-            if (sidebarManageBtn) {
-                sidebarManageBtn.disabled = !canManage;
-                sidebarManageBtn.title = canManage ? 'Gerir partilha' : getPermissionHint('manage');
-                sidebarManageBtn.classList.toggle('opacity-50', !canManage);
-                sidebarManageBtn.classList.toggle('cursor-not-allowed', !canManage);
-            }
-            [sidebarCategoryManageBtn, categoryManageBtn, docCategoryManageBtn].forEach((btn) => {
-                if (!btn) return;
-                btn.disabled = !canManage;
-                btn.title = canManage ? 'Gerir categorias' : getPermissionHint('manage');
-                btn.classList.toggle('opacity-50', !canManage);
-                btn.classList.toggle('cursor-not-allowed', !canManage);
-            });
-            const deleteVaultBtn = document.getElementById('deleteVaultBtn');
-            if (deleteVaultBtn) {
-                deleteVaultBtn.disabled = !canDeleteVault;
-                deleteVaultBtn.title = canDeleteVault ? 'Apagar cofre' : (activeVault?.is_personal ? 'O cofre pessoal não pode ser apagado' : 'Só o owner pode apagar este cofre');
-                deleteVaultBtn.classList.toggle('opacity-50', !canDeleteVault);
-                deleteVaultBtn.classList.toggle('cursor-not-allowed', !canDeleteVault);
-            }
-            if (deleteVaultQuickBtn) deleteVaultQuickBtn.classList.toggle('hidden', !canDeleteVault);
-            if (actionSummaryTitle) actionSummaryTitle.textContent = getRoleLabel(activeVault?.role);
-            if (actionSummaryDesc) actionSummaryDesc.textContent = getRoleDescription(activeVault?.role);
-            if (chipView) chipView.className = `px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider ${canCurrentVaultPerform('view') ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300' : 'bg-surface-200 text-surface-600 dark:bg-surface-800 dark:text-surface-300'}`;
-            if (chipUpload) chipUpload.className = `px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider ${canUpload ? 'bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300' : 'bg-surface-200 text-surface-600 dark:bg-surface-800 dark:text-surface-300'}`;
-            if (chipEdit) chipEdit.className = `px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider ${canEditDocs ? 'bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300' : 'bg-surface-200 text-surface-600 dark:bg-surface-800 dark:text-surface-300'}`;
-            if (chipManage) chipManage.className = `px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider ${canManage ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300' : 'bg-surface-200 text-surface-600 dark:bg-surface-800 dark:text-surface-300'}`;
+            syncVaultPermissionUi();
             try {
                 await loadVaults();
                 await loadVaultDetails(activeVaultId);
@@ -3601,6 +4012,7 @@
                 console.error('Failed to fetch documents:', err);
             }
             updateVaultUi();
+            syncVaultPermissionUi();
             if (currentView === 'overview') updateOverview();
             else if (currentView === 'documents') updateDocsView();
             else if (currentView === 'favorites') updateFavoritesView();
@@ -4082,6 +4494,7 @@
             closeProfileModal();
             renderThemeOptions();
             applyTheme(currentTheme, false);
+            updateEnvironmentUi();
             document.getElementById('settingsModal').classList.remove('hidden');
         }
         function closeSettingsModal() { document.getElementById('settingsModal').classList.add('hidden'); }

@@ -74,6 +74,28 @@ ghcr.io/barroso88/docvault:latest
 
 Sempre que fizeres push para `main`, a imagem `latest` é atualizada. No Unraid, isso permite-te usar o botão de update do próprio container para puxar a versão nova.
 
+## Android com Capacitor
+
+A app também está preparada para Android com Capacitor.
+
+### Gerar / sincronizar
+
+```bash
+npm install
+npm run mobile:sync
+```
+
+### Abrir no Android Studio
+
+```bash
+npm run mobile:open
+```
+
+Notas importantes:
+- precisas de Java e Android Studio instalados localmente
+- o shell Android usa o backend público em `https://docs.barrosoportal.com`
+- o login Google pode exigir ajustes adicionais no Android, dependendo do dispositivo e do WebView
+
 ## Unraid
 
 1. Faz push deste projeto para o GitHub.
@@ -103,3 +125,4 @@ Verifica `.env.example` para a lista completa.
 - O ficheiro `data/` não deve ser versionado.
 - O ficheiro `.env` não deve ser commitado.
 - A aplicação está preparada para correr tanto localmente como em Docker/Unraid.
+- A aplicação também tem base para Android via Capacitor.

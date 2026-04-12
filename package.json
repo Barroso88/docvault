@@ -8,20 +8,26 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon --legacy-watch --watch src --watch public src/server.js",
-    "check": "node -c src/server.js"
+    "check": "node -c src/server.js",
+    "mobile:sync": "npx cap sync android",
+    "mobile:open": "npx cap open android"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "better-sqlite3": "^12.2.0",
-    "multer": "^1.4.5-lts.1",
-    "cors": "^2.8.5",
+    "@capacitor/android": "^8.3.0",
+    "@capacitor/cli": "^8.3.0",
+    "@capacitor/core": "^8.3.0",
     "bcrypt": "^5.1.1",
-    "jsonwebtoken": "^9.0.2",
-    "uuid": "^9.0.0",
+    "better-sqlite3": "^12.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
     "google-auth-library": "^9.15.1",
-    "dotenv": "^16.4.5"
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
     "nodemon": "^3.1.10"
   }
 }

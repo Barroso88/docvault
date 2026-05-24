@@ -37,8 +37,13 @@ router.get('/', auth, (req, res) => {
 
 router.post('/', auth, upload.single('file'), (req, res) => {
   const { name, category, date, description } = req.body;
-  const vault = resolveVaultForRequest(req.user.id, req.body.vaultId || req.query.vaultId || null);
-  requireVaultPermission(req.user.id, vault.id, 'upload');
+  let vault;
+  try {
+    vault = resolveVaultForRequest(req.user.id, req.body.vaultId || req.query.vaultId || null);
+    requireVaultPermission(req.user.id, vault.id, 'upload');
+  } catch (err) {
+    return res.status(err.status || 403).json({ error: err.message || 'Não tens acesso a este cofre' });
+  }
   const id = uuidv4();
   const file = req.file;
   const categoryKey = resolveDocumentCategory(vault.id, category, 'outros');

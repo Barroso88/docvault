@@ -8,10 +8,10 @@ function auth(req, res, next) {
 
   try {
     req.user = jwt.verify(token, JWT_SECRET);
-    next();
   } catch {
-    res.status(401).json({ error: 'Token inválido' });
+    return res.status(401).json({ error: 'Token inválido' });
   }
+  next();
 }
 
 module.exports = auth;
